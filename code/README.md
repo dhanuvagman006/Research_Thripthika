@@ -39,12 +39,13 @@ already installed on Colab.
 
 ## Results
 
-Test set (610 volumes), seed 0, 30 epochs, 4-core CPU without a GPU:
+Test set (610 volumes), default settings (50 epochs, batch size 32, learning rate 0.001, seed 0),
+4-core CPU without a GPU:
 
-| Model | Test accuracy | AUC | Trainable parameters | Training time |
-| --- | --- | --- | --- | --- |
-| `baseline` | 73.9% | 0.976 | 1,166,347 | 4.5 min |
-| `vlm` | 73.3% | 0.973 | 1,360,898 | 4.3 min |
+| Model | Test accuracy | AUC | Best validation accuracy | Trainable parameters | Training time |
+| --- | --- | --- | --- | --- | --- |
+| `baseline` | 80.5% | 0.981 | 88.2% | 1,166,347 | 7.2 min |
+| `vlm` | 80.0% | 0.979 | 90.7% | 1,360,898 | 6.9 min |
 
 Results from a single run; expect a few points of variation between seeds and hardware.
 
