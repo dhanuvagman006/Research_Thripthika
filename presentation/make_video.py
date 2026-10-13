@@ -67,10 +67,10 @@ def s_title(img, d, k, t):
         dot(d, x, y, 4 + i % 4, (45, 70, 110))
     T(d, (160, 250), "DEEP LEARNING MINI PROJECT  ·  EXPLAINED SIMPLY", 32, (150, 210, 210), True)
     y = P(d, 160, 320, "Design of a Vision-Language Model for 3D Medical Image Analysis", 76, WHITE, 1550, 1.2, True)
-    T(d, (160, y + 40), "Thripthika M P  ·  Research Scholar, NITK Surathkal", 38, (210, 220, 235))
+    T(d, (160, y + 40), "3D CT scans  ·  Deep learning  ·  Vision-language models", 38, (210, 220, 235))
     if k >= 1:
         x = 160
-        for s in ["Signals you know", "The data", "The models", "The improvement", "The results", "How to present"]:
+        for s in ["The data", "Signals & filters", "The baseline", "The improvement", "The results", "Summary"]:
             x = pill(d, x, y + 150, s, (40, 62, 100), (230, 240, 250), 28) + 18
 
 def s_onesentence(img, d, k, t):
@@ -343,7 +343,7 @@ def s_problem(img, d, k, t):
         fan(1390, 555, [lerp(a, b, u) for a, b in zip(tight, spread)], mix(RED, GREEN, u), 190)
         if u > 0.9: T(d, (1390, 790), "similarity = −0.10 (distinct)", 28, NAVY, True, "ma"); T(d, (1390, 835), "accuracy rose to 73.3%", 30, GREEN, True, "ma")
     if k >= 5:
-        box(d, 120, 920, 1680, 80, ORANGE_L, ORANGE); T(d, (960, 960), "Mention this in your presentation — it shows the project was really built and tested", 30, ORANGE, True, "mm")
+        box(d, 120, 920, 1680, 80, ORANGE_L, ORANGE); T(d, (960, 960), "Key takeaway: the model was actually built, tested and improved", 30, ORANGE, True, "mm")
 
 def s_results(img, d, k, t):
     P(d, 120, 230, "Final results — 50 epochs, tested on 610 volumes the models never saw", 40, NAVY, 1680, bold=True)
@@ -411,7 +411,7 @@ def s_qa(img, d, k, t):
     qa = [("Why not use Med3DVLM directly?", "It needs 120,000 scans and 8 big GPUs. We use the same idea at a size one computer can train."),
           ("Why a VLM if accuracy is the same?", "It also learns the meaning of words, and can later use new descriptions such as full radiology reports."),
           ("What is a convolution layer?", "A bank of small 3D filters, like FIR filters — but their coefficients are learned from data."),
-          ("What problem did you face?", "The organ sentences looked almost identical. Removing their mean (like removing DC offset) fixed it.")]
+          ("What problem was found while building it?", "The organ sentences looked almost identical. Removing their mean (like removing DC offset) fixed it.")]
     for i, (q, a) in enumerate(qa):
         if k >= i:
             y = 250 + i * 190; box(d, 120, y, 1680, 170)
@@ -422,13 +422,13 @@ def s_summary(img, d, k, t):
                                 ("Data & method", "1,742 volumes, 11 classes. 3D CNN baseline, modified to match scans with organ sentences"),
                                 ("Result", "Both reach ≈ 80% accuracy — the small VLM works as well as the standard model")]):
         if k >= i: card(d, 120 + i * 570, 300, 530, 460, a, b, [TEAL_L, WHITE, ORANGE_L][i], [TEAL, LINE, ORANGE][i], 42, 32)
-    if k >= 2: T(d, (960, 880), "Thank you — all the best for your presentation!", 44, TEAL, True, "mm")
+    if k >= 2: T(d, (960, 880), "Thank you", 44, TEAL, True, "mm")
 
 A = "all"
 SCENES = [
  ("Welcome", "", s_title, {0: A, 1: A}, [
-  "Hello Thripthika ma'am. This video explains your deep learning mini project from start to finish, in simple words. It is made for someone from an electronics and communication background, so we will use ideas you already know, like signals, filters and correlation.",
-  "The project title is: Design of a Vision-Language Model for 3D Medical Image Analysis. By the end of this video, you will understand every part of the project, and you will be able to present it with confidence."]),
+  "Design of a Vision-Language Model for 3D Medical Image Analysis. The goal of this project is to make a computer look at a 3D CT scan of the body, and recognise which organ it shows.",
+  "We will go step by step: the data, the core idea of convolution, the baseline model, the improved vision-language model, and finally the results."]),
  ("1 · The big picture", "The project in one sentence", s_onesentence, {}, [
   "Here is the whole project in one sentence. We teach a computer to look at a 3D CT scan, and tell us which organ it shows.",
   "We build this in two ways. The first is a standard deep learning model. We call it the baseline.",
@@ -450,9 +450,9 @@ SCENES = [
  ("3 · Machine learning", "What is machine learning?", s_ml, {2: A}, [
   "Now, what is machine learning? In classic signal processing, an engineer designs a filter by hand, choosing its coefficients, and the filter turns an input signal into an output.",
   "In machine learning, we do not design the filter. Instead, we give the computer many examples together with the correct answers, and the computer learns the filter coefficients by itself.",
-  "If you have studied adaptive filters, like the LMS algorithm, you already know the idea. The model looks at an example, makes a guess, measures the error against the correct answer, and adjusts its coefficients a little to reduce that error. It repeats this loop thousands of times."]),
- ("3 · Machine learning", "Convolution — you already know it", s_conv, {0: 6.5, 1: A}, [
-  "Good news. The main building block of our model is convolution, which you already know from signals and systems. A small kernel slides along the input signal. At every position, we multiply and add. Here the kernel is minus one, zero, one, an edge detector, so every edge in the input creates a spike in the output.",
+  "This is the same idea as an adaptive filter, such as the LMS algorithm. The model looks at an example, makes a guess, measures the error against the correct answer, and adjusts its coefficients a little to reduce that error. It repeats this loop thousands of times."]),
+ ("3 · Machine learning", "Convolution — the core operation", s_conv, {0: 6.5, 1: A}, [
+  "The main building block of the model is convolution, the same operation used in signals and systems. A small kernel slides along the input signal. At every position, we multiply and add. Here the kernel is minus one, zero, one, an edge detector, so every edge in the input creates a spike in the output.",
   "Exactly the same operation works on images. Here, a small 3 by 3 window slides over a real CT slice, and at every position, it multiplies and adds the pixel values.",
   "A convolutional neural network, or CNN, does this in three dimensions, using 3 by 3 by 3 kernels. The big difference from classic filtering is this: the kernel coefficients are not designed by hand. The network learns them from the training data."]),
  ("4 · The baseline model", "Model 1: the 3D CNN (baseline)", s_cnn, {1: A, 3: A}, [
@@ -461,7 +461,7 @@ SCENES = [
   "The early blocks find simple things like edges. The later blocks combine them into shapes, and then into parts of organs. At the end, the whole scan is summarised as 256 numbers.",
   "A final layer turns these 256 numbers into 11 scores, one for each organ, and the highest score is the answer. In total, this model has about 1.17 million adjustable numbers, called parameters, and all of them are learned from data."]),
  ("4 · The baseline model", "How the model learns", s_train, {2: 5.5}, [
-  "During training, the model's guess is compared with the correct organ. The difference is measured by the loss, here called cross-entropy. You can think of the loss as the error signal.",
+  "During training, the model's guess is compared with the correct organ. The difference is measured by the loss, here called cross-entropy. The loss works like an error signal.",
   "The Adam optimiser then updates the parameters to reduce the error, with a step size, called the learning rate, of 0.001. We show 32 scans at a time, flip them randomly for variety, and repeat for 50 epochs. One epoch is one full pass over all 971 training volumes.",
   "This graph is from our real training run. It shows the accuracy on the practice test after each epoch. Both models start low, and quickly climb to around 85 to 90 percent.",
   "After every epoch, we keep the version of the model that scored best on the practice test."]),
@@ -471,7 +471,7 @@ SCENES = [
  ("5 · The modification", "What is a vision-language model?", s_vlm, {0: 2.5}, [
   "A vision-language model learns from pictures and words together. It places pictures and sentences in the same space, so that a picture moves close to the sentence that describes it.",
   "A famous example is CLIP, from 2021, which learned from millions of internet images and their captions.",
-  "Your first base paper, Med3DVLM, published in 2026, applies this idea to 3D medical scans. It is very powerful, but it needs 120,000 scan and report pairs, and eight large graphics cards. That is too heavy for a mini project.",
+  "The first base paper, Med3DVLM, published in 2026, applies this idea to 3D medical scans. It is very powerful, but it needs 120,000 scan and report pairs, and eight large graphics cards. That is too heavy for a mini project.",
   "So, our project builds a small and simple version of the same idea, which can be trained on one ordinary computer."]),
  ("5 · The modification", "Model 2: our vision-language model", s_ourvlm, {4: A}, [
   "Here is our modification. We keep the same 3D CNN, but we replace its final layer with sentence matching.",
@@ -490,36 +490,36 @@ SCENES = [
  ("6 · Building it", "A problem we found, and the fix", s_problem, {2: 4.5, 4: 2.8}, [
   "When we actually built this model, we found a problem. The 11 sentences differ by only one word, so ClinicalBERT gave them almost identical vectors. Their similarity was 0.985, very close to a perfect one.",
   "Because all the sentences looked the same, the model got confused, and its accuracy was only 66.6 percent.",
-  "You will recognise this problem from electronics. It is like several signals riding on a large DC offset. The big common part hides the small differences between them. The fix is the same: remove the mean.",
+  "In signal processing terms, this is like several signals riding on a large DC offset. The big common part hides the small differences between them. The fix is the same: remove the mean.",
   "So we subtract the average of the 11 sentence vectors from each one. In machine learning, this is called centring.",
   "After centring, the sentence vectors point in clearly different directions, and the accuracy rose to 73.3 percent in the same short test.",
-  "This is a very good point to mention in your presentation. It shows that the project was really built and tested."]),
+  "This is a key takeaway. The model was not only designed on paper. It was actually built, tested, and improved."]),
  ("7 · The results", "Final results", s_results, {1: 2.0}, [
   "Now, the final results. Both models were trained for 50 epochs, and tested on the 610 test volumes that they had never seen before.",
   "The baseline 3D CNN reached 80.5 percent accuracy. Our vision-language model reached 80.0 percent. They are practically equal.",
-  "We also measured the AUC, the area under the ROC curve, which you may know from detection theory. 0.5 means guessing, and 1 means perfect. The scores were 0.981 and 0.979. Both are excellent.",
+  "We also measured the AUC, the area under the ROC curve, a standard measure from detection theory. 0.5 means guessing, and 1 means perfect. The scores were 0.981 and 0.979. Both are excellent.",
   "Each model trained in only about 7 minutes, on an ordinary computer without a graphics card.",
   "So the main finding is this: the small vision-language model matches the standard model's accuracy, while also learning the meaning of the organ names."]),
  ("7 · The results", "Where does the model make mistakes?", s_confusion, {0: 4.0, 1: A}, [
   "This table is called a confusion matrix. It shows where the model makes mistakes. The rows are the true organs, and the columns are the model's answers. The teal diagonal shows the correct answers.",
   "Most mistakes are between the left and right kidney, and between the left and right femur. These pairs are mirror images, and look almost the same in small scans. So this mistake is very understandable."]),
  ("8 · Literature", "The two base papers", s_papers, {}, [
-  "Your project builds on two base papers.",
+  "The project builds on two base papers.",
   "Base paper one is Med3DVLM, in the IEEE Journal of Biomedical and Health Informatics, 2026. It showed that matching 3D scans with text works very well. We use its image-text matching idea, and its SigLIP loss.",
   "Base paper two is Diagnostic Captioning, in IEEE Transactions on Pattern Analysis and Machine Intelligence, 2025. It showed that aligning image features with text helps a model catch fine medical details. It supports why our modification is useful."]),
- ("9 · Presenting", "How to present this project", s_present, {}, [
-  "Here is a simple order for your presentation. One: the problem and the objective. Two: the dataset, with 1,742 samples and 11 classes.",
+ ("9 · Presenting", "Presentation outline", s_present, {}, [
+  "The project can be presented in seven parts. One: the problem and the objective. Two: the dataset, with 1,742 samples and 11 classes.",
   "Three: the methodology, which is the baseline 3D CNN. Four: the modification, which is the vision-language model.",
   "Five: the results, with the confusion matrix. Six: the literature, meaning the two base papers. And seven: the conclusion."]),
- ("9 · Presenting", "Questions you may be asked", s_qa, {}, [
-  "You may be asked: why not use Med3DVLM directly? You can answer: it needs 120,000 scans and eight large graphics cards. We use the same idea at a size that one computer can train.",
-  "You may be asked: why use a vision-language model if the accuracy is the same? You can answer: it also learns the meaning of words, and later it can use new descriptions, such as full radiology reports.",
-  "You may be asked: what is a convolution layer? You can answer: it is a bank of small 3D filters, like FIR filters, but their coefficients are learned from data instead of designed by hand.",
-  "And you may be asked: what problem did you face? You can answer: the organ sentences looked almost identical to the text model, and removing their mean, just like removing a DC offset, fixed it."]),
+ ("9 · Presenting", "Common questions", s_qa, {}, [
+  "Question: why not use Med3DVLM directly? Answer: it needs 120,000 scans and eight large graphics cards. We use the same idea at a size that one computer can train.",
+  "Question: why use a vision-language model if the accuracy is the same? Answer: it also learns the meaning of words, and later it can use new descriptions, such as full radiology reports.",
+  "Question: what is a convolution layer? Answer: it is a bank of small 3D filters, like FIR filters, but their coefficients are learned from data instead of designed by hand.",
+  "Question: what problem was found while building it? Answer: the organ sentences looked almost identical to the text model, and removing their mean, just like removing a DC offset, fixed it."]),
  ("Summary", "In short", s_summary, {}, [
   "To summarise. The objective is to recognise organs in 3D CT scans, using a simple vision-language model.",
   "The data is 1,742 CT volumes with 11 organ classes. The method is a 3D CNN baseline, modified to match each scan with organ sentences.",
-  "And the result: both models reach about 80 percent accuracy. So the small vision-language model works as well as the standard model. Thank you, and all the very best for your presentation!"]),
+  "And the result: both models reach about 80 percent accuracy. So the small vision-language model works as well as the standard model. Thank you for watching."]),
 ]
 
 def render(si, k, t):
@@ -538,18 +538,19 @@ if len(sys.argv) > 5 and sys.argv[5] == "preview":
 
 # ---------- narration ----------
 steps = [(si, k, txt) for si, sc in enumerate(SCENES) for k, txt in enumerate(sc[4])]
+from kokoro_onnx import Kokoro
+import soundfile as sf
+KOK = Kokoro(os.environ["KOKORO_DIR"] + "/kokoro-v1.0.onnx", os.environ["KOKORO_DIR"] + "/voices-v1.0.bin")
 def tts(job):
-    si, k, txt = job; mp3, wav = f"{OUT}/a_{si:02d}_{k}.mp3", f"{OUT}/a_{si:02d}_{k}.wav"
-    import hashlib; marker = f"{OUT}/a_{si:02d}_{k}." + hashlib.md5(txt.encode()).hexdigest()[:10]
+    si, k, txt = job; raw, wav = f"{OUT}/k_{si:02d}_{k}.wav", f"{OUT}/a_{si:02d}_{k}.wav"
+    import hashlib; marker = f"{OUT}/k_{si:02d}_{k}." + hashlib.md5(txt.encode()).hexdigest()[:10]
     if not (os.path.exists(wav) and os.path.exists(marker)):
-        from gtts import gTTS
-        for attempt in range(5):
-            try: gTTS(txt, lang="en", tld="co.in").save(mp3); break
-            except Exception: import time; time.sleep(4 * (attempt + 1))
-        subprocess.run(["ffmpeg", "-y", "-i", mp3, "-af", "atempo=1.1", "-ar", "44100", "-ac", "1", wav], check=True, capture_output=True)
+        samples, sr = KOK.create(txt.replace("Med3DVLM", "Med 3D V L M").replace("SigLIP", "Sig-lip").replace("ClinicalBERT", "Clinical BERT").replace("OrganMNIST3D", "Organ M-NIST 3D").replace("MedMNIST", "Med M-NIST").replace("3D", "3-D"), voice="af_heart", speed=1.0, lang="en-us")
+        sf.write(raw, samples, sr)
+        subprocess.run(["ffmpeg", "-y", "-i", raw, "-ar", "44100", "-ac", "1", wav], check=True, capture_output=True)
         open(marker, "w").close()
     return wav
-with ThreadPoolExecutor(4) as ex: list(ex.map(tts, steps))
+for j in steps: tts(j)
 
 PAD, REVEAL, SCENE_FADE = 0.8, 0.7, 0.6
 plan, audio = [], []
