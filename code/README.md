@@ -1,5 +1,9 @@
 # Organ classification on 3D CT: 3D CNN vs. a simple vision-language model
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhanuvagman006/Research_Thripthika/blob/claude/sharp-cerf-ohi7fw/notebooks/OrganVLM_Colab.ipynb)
+
+Prefer Colab? The notebook `../notebooks/OrganVLM_Colab.ipynb` contains the same models plus diagrams and full analysis.
+
 Code for the project proposal *Design of a Vision-Language Model for 3D Medical Image Analysis*
 (see `../proposal/`). It trains and compares two models on the OrganMNIST3D dataset
 (1,742 CT volumes of 28 × 28 × 28 voxels, 11 organ classes).
